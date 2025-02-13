@@ -1,0 +1,372 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Kumbh Sans', sans-serif;
+  color: #fff;
+  font-size: 20px;
+}
+
+/* viewport ocupando 100% de cada seção */
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Seções */
+.section-hero {
+  position: relative;
+  background: url('../Pictures/vetor5.jpg') no-repeat center center;
+  background-size: 100% 100%; /* Faz a imagem preencher toda a área sem deixar espaços */
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+
+.section-about {
+  background: radial-gradient(rgb(12 0 45) 0%, rgb(0 0 0) 35%, rgb(0 0 0))
+}
+/* Seção de Feedback */
+.section-highlight {
+  padding: 60px 0;
+  background: radial-gradient(at top center, #000000, #000000);
+  color: #fff;
+}
+
+.section-highlight .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.highlight-image img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.highlight-image img:hover {
+  transform: scale(1.03);
+}
+
+.highlight-text {
+  padding: 20px;
+}
+
+.highlight-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.highlight-subtitle {
+  font-size: 1.75rem;
+  margin-bottom: 20px;
+  color: #b19cd9;
+}
+
+.highlight-text p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.section-pricing {
+  background: linear-gradient(90deg, rgb(12, 0, 32) 0%, rgb(0 0 0) 35%, rgb(3 1 16));
+}
+
+.section-footer {
+  background-color: #1a1a1a;
+}
+
+/* Container para centralizar o conteúdo */
+.content {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Estilização do título da empresa */
+.company-name {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+/* Cor de destaque do texto */
+.highlight {
+  color: #9d4fff; 
+  font-weight: bold; 
+  
+}
+
+/* Estilização do subtítulo */
+.tagline {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+
+
+
+/* ===============================
+   Área de Entrada e Botões
+   =============================== */
+   .compare-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* botão de Feedback */
+  .feedback-button-container {
+    margin-top: 40px;
+  }
+  
+  .btn-feedback {
+    background-color: #6200ff;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .btn-feedback:hover {
+    background-color: #4b00cc;
+    transform: scale(1.05);
+  }
+  
+  /* Formulário de entrada */
+  .imput-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .imput-form input {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    width: 250px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .imput-form input:focus {
+    outline: none;
+    border-color: #6200ff;
+    box-shadow: 0 0 8px rgba(98, 0, 255, 0.5);
+  }
+  
+  .imput-form button {
+    padding: 12px 24px;
+    background-color: #6200ff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .imput-form button:hover {
+    background-color: #4b00cc;
+    transform: scale(1.05);
+  }
+  
+  /* Área de exibição da distância e botão de comparar */
+  .distance-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .distance-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .compare-btn {
+    padding: 12px 24px;
+    background-color: #4b00cc;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .compare-btn:hover {
+    background-color: #6200ff;
+    transform: scale(1.05);
+  }
+  
+  /* Mensagem de erro */
+  .error {
+    margin-top: 10px;
+    color: #ff4d4d;
+    font-weight: bold;
+  }
+  
+  /* Área para o ícone  Uber,99 e InDRIVE */
+.card-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card-icon img {
+  max-width: 60%;
+  max-height: 60%;
+}
+
+  /* ===============================
+     Cards com Menu Hamburguer
+     =============================== */
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin: 30px auto;
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+
+  .transport-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    width: 260px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .transport-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .hamburger {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    transition: transform 0.3s ease;
+  }
+  .hamburger:hover {
+    transform: rotate(90deg);
+  }
+  
+  .card-options {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  .card-options.open {
+    max-height: 200px; /* Valor suficiente para exibir as opções */
+  }
+  .card-options li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .card-options li:hover {
+    background: rgba(98, 0, 255, 0.2);
+  }
+  
+  /* ===============================
+     Footer
+     =============================== */
+  .section-footer {
+    background-color: #000;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  /* ===============================
+     Animações com Keyframes
+     =============================== */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
