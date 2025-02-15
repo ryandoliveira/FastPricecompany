@@ -14,27 +14,20 @@ function ImputForm({ onCompare }) {
 
   return (
     <form onSubmit={handleSubmit} className="imput-form">
-      <div className="input-group">
-        <label htmlFor="origin">Local de Partida:</label>
-        <input
-          id="origin"
-          type="text"
-          placeholder="Digite seu endereço atual"
-          value={origin}
-          onChange={(e) => setOrigin(e.target.value)}
-        />
-      </div>
-      <div className="input-group">
-        <label htmlFor="destination">Destino:</label>
-        <input
-          id="destination"
-          type="text"
-          placeholder="Digite seu endereço de destino"
-          value={destination}
-          onChange={(e) => setDestination(e.target.value)}
-        />
-      </div>
-      <button type="submit">Calcular Distância</button>
+      <input
+        type="text"
+        placeholder="Local de Partida"
+        value={origin}
+        onChange={(e) => setOrigin(e.target.value)}
+      />
+      <span className="arrow-loader">&#8594;</span>
+      <input
+        type="text"
+        placeholder="Local de Destino"
+        value={destination}
+        onChange={(e) => setDestination(e.target.value)}
+      />
+      <button type="submit">Calcular</button>
     </form>
   );
 }
