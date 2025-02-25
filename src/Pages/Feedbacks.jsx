@@ -1,6 +1,11 @@
-// src/pages/Feedbacks.jsx
 import React from 'react';
 import '../styles/Feedbacks.css';
+
+import feedback1 from '../Pictures/feedback1.jpg';
+import feedback2 from '../Pictures/feedback2.jpg';
+import feedback3 from '../Pictures/feedback3.jpg';
+import feedback4 from '../Pictures/feedback4.jpg';
+import feedback5 from '../Pictures/feedback5.jpg';
 
 function Feedbacks() {
   const feedbacksData = [
@@ -8,33 +13,51 @@ function Feedbacks() {
       id: 1,
       name: "João Silva",
       feedback: "Utilizei o FastPrice para comparar os preços das corridas e encontrei a melhor opção para o meu dia a dia. Recomendo demais!",
-      image: "/pictures/feedback1.jpg"  // Certifique-se de que as imagens estejam em public/pictures ou ajuste o caminho
+      image: feedback1,
+      rating: 5 // Avaliação de 5 estrelas
     },
     {
       id: 2,
       name: "Mariana Souza",
-      feedback: "Com o FastPrice, consegui economizar e viajar com muito conforto. O site é super intuitivo e os resultados são precisos!",
-      image: "/pictures/feedback2.jpg"
+      feedback: "Adorei o FastPrice! Me ajudou muito a economizar e encontrar as melhores opções de transporte. Só não dei 5 estrelas porque ainda acho que poderia ter mais opções de personalização.",
+      image: feedback2,
+      rating: 4 // Avaliação de 4 estrelas
     },
     {
       id: 3,
       name: "Carlos Pereira",
-      feedback: "Fiquei impressionado com a facilidade de encontrar a opção mais barata. Agora, planejo todas as minhas viagens com o FastPrice!",
-      image: "/pictures/feedback3.jpg"
+      feedback: "O FastPrice foi útil para comparar os preços, mas não consegui encontrar todas as opções que eu esperava. Acredito que ele pode melhorar na diversidade de opções.",
+      image: feedback3,
+      rating: 2 // Avaliação de 2 estrelas
     },
     {
       id: 4,
       name: "Fernanda Oliveira",
-      feedback: "O FastPrice mudou a forma como escolho meus transportes. Rápido, simples e eficiente – não vivo sem!",
-      image: "/pictures/feedback4.jpg"
+      feedback: "O FastPrice foi útil para comparar os preços, mas não consegui encontrar todas as opções que eu esperava. Acredito que ele pode melhorar na diversidade de opções.",
+      image: feedback4,
+      rating: 3 // Avaliação de 3 estrelas
     },
     {
       id: 5,
       name: "Ricardo Mendes",
       feedback: "Sempre busco a melhor relação custo-benefício. Com o FastPrice, encontro as melhores opções em poucos cliques. Incrível!",
-      image: "/pictures/feedback5.jpg"
+      image: feedback5,
+      rating: 5 // Avaliação de 4 estrelas
     }
   ];
+
+  // Função para renderizar as estrelas de avaliação
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={`star ${i <= rating ? "filled" : ""}`}>
+          &#9733; {/* Símbolo de estrela */}
+        </span>
+      );
+    }
+    return stars;
+  };
 
   return (
     <section className="section feedbacks">
@@ -48,6 +71,9 @@ function Feedbacks() {
               </div>
               <p className="feedback-text">"{item.feedback}"</p>
               <h4 className="feedback-name">{item.name}</h4>
+              <div className="feedback-rating">
+                {renderStars(item.rating)} {/* Exibe as estrelas de acordo com a avaliação */}
+              </div>
             </div>
           ))}
         </div>
