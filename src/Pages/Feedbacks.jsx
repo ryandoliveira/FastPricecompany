@@ -2,10 +2,7 @@ import React from 'react';
 import '../styles/Feedbacks.css';
 
 import feedback1 from '../Pictures/feedback1.jpg';
-import feedback2 from '../Pictures/feedback2.jpg';
-import feedback3 from '../Pictures/feedback3.jpg';
-import feedback4 from '../Pictures/feedback4.jpg';
-import feedback5 from '../Pictures/feedback5.jpg';
+
 
 function Feedbacks() {
   const feedbacksData = [
@@ -20,28 +17,28 @@ function Feedbacks() {
       id: 2,
       name: "Mariana Souza",
       feedback: "Adorei o FastPrice! Me ajudou muito a economizar e encontrar as melhores opções de transporte. Só não dei 5 estrelas porque ainda acho que poderia ter mais opções de personalização.",
-      image: feedback2,
+      image: feedback1,
       rating: 4 // Avaliação de 4 estrelas
     },
     {
       id: 3,
       name: "Carlos Pereira",
       feedback: "O FastPrice foi útil para comparar os preços, mas não consegui encontrar todas as opções que eu esperava. Acredito que ele pode melhorar na diversidade de opções.",
-      image: feedback3,
+      image: feedback1,
       rating: 2 // Avaliação de 2 estrelas
     },
     {
       id: 4,
       name: "Fernanda Oliveira",
       feedback: "O FastPrice foi útil para comparar os preços, mas não consegui encontrar todas as opções que eu esperava. Acredito que ele pode melhorar na diversidade de opções.",
-      image: feedback4,
+      image: feedback1,
       rating: 3 // Avaliação de 3 estrelas
     },
     {
       id: 5,
       name: "Ricardo Mendes",
       feedback: "Sempre busco a melhor relação custo-benefício. Com o FastPrice, encontro as melhores opções em poucos cliques. Incrível!",
-      image: feedback5,
+      image: feedback1,
       rating: 5 // Avaliação de 4 estrelas
     }
   ];
@@ -83,3 +80,4 @@ function Feedbacks() {
 }
 
 export default Feedbacks;
+
