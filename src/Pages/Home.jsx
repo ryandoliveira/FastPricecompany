@@ -21,19 +21,17 @@ async function getCoordinates(address) {
   throw new Error("Endereço não encontrado: " + address);
 }
 
-// Função para calcular a distância considerando a rota mais rápida (via OSRM)
+// Função para calcular a distância considerando a rota de carro (perfil driving) via OSRM
 async function getDrivingDistance(origin, destination) {
   try {
     const originCoords = await getCoordinates(origin);
     const destinationCoords = await getCoordinates(destination);
-    // OSRM espera os pares no formato lon,lat separados por ponto-e-vírgula; usamos HTTPS
-    const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${originCoords[0]},${originCoords[1]};${destinationCoords[0]},${destinationCoords[1]}?overview=false`;
+    // OSRM usando perfil 'driving'
+    const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${originCoords[0]},${originCoords[1]};${destinationCoords[0]},${destinationCoords[1]}?overview=false&steps=true`;
     const response = await fetch(osrmUrl);
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(
-        `OSRM API error: ${response.status} ${response.statusText} - ${errorText}`
-      );
+      throw new Error(`OSRM API error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     const data = await response.json();
     if (data.routes && data.routes.length > 0) {
@@ -53,7 +51,6 @@ function Home() {
   const [distance, setDistance] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Atualiza os estados com os valores recebidos do ImputForm e calcula a distância
   const handleCompare = async (origin, destination) => {
     setOriginAddress(origin);
     setDestinationAddress(destination);
@@ -72,7 +69,7 @@ function Home() {
     console.log("Origem:", originAddress);
     console.log("Destino:", destinationAddress);
     console.log("Distância:", distance);
-    // Implemente a lógica de comparação de preços conforme necessário
+    // Implementar lógica de comparação de preços
   };
 
   return (
@@ -96,12 +93,7 @@ function Home() {
           <div className="about-text">
             <h2>Sobre Nós</h2>
             <p>
-              Na FastPrice, reunimos informações das principais plataformas de
-              transporte, como <span className="highlight">Uber</span>,{' '}
-              <span className="highlight">99</span> e{' '}
-              <span className="highlight">InDrive</span>, para oferecer a você a
-              melhor comparação de preços. Nosso objetivo é facilitar sua
-              mobilidade e ajudar você a tomar a decisão mais vantajosa.
+              Na FastPrice, reunimos informações das principais plataformas de transporte, como <span className="highlight">Uber</span>, <span className="highlight">99</span> e <span className="highlight">InDrive</span>, para oferecer a você a melhor comparação de preços. Nosso objetivo é facilitar sua mobilidade e ajudar você a tomar a decisão mais vantajosa.
             </p>
           </div>
         </div>
