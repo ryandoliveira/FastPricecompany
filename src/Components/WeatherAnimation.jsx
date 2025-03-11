@@ -5,9 +5,9 @@ import chuva from "../Pictures/chuva.gif";
 import tempestade from "../Pictures/tempestade.gif";
 
 // Tempo de mudança do clima (em segundos) para teste
-const CLOUDY_TIME = 6;   // Ex.: 6 segundos para "cloudy"
-const STORM_TIME = 12;   // Ex.: 12 segundos para "storm"
-const CYCLE_TIME = 18;   // Ex.: 18 segundos para reiniciar e voltar a "sunny"
+const CLOUDY_TIME = 60;   // Ex.: 6 segundos para "cloudy"
+const STORM_TIME = 120;   // Ex.: 12 segundos para "storm"
+const CYCLE_TIME = 180;   // Ex.: 18 segundos para reiniciar e voltar a "sunny"
 
 function WeatherAnimation() {
   const [timeElapsed, setTimeElapsed] = useState(0);
