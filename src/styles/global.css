@@ -186,9 +186,9 @@ body {
 
 @media (max-width: 768px) {
   .highlight-image img {
-    width: 140%;
+    
     margin: 0;
-    margin-left: -20%; 
+    margin-left: -5%; 
   }
 }
 
@@ -499,7 +499,7 @@ body {
   cursor: pointer;
 }
 
-/* Menu de opções (inicialmente oculto) */
+/* Menu de opções (start oculto) */
 .transport-card .card-options {
   list-style: none;
   padding: 0;
@@ -512,7 +512,7 @@ body {
   margin-top: 10px;
 }
 
-/* Itens do menu */
+/* opcoes do menu */
 .transport-card .card-options li {
   display: flex;
   justify-content: space-between;
@@ -527,14 +527,14 @@ body {
   border-bottom: none;
 }
 
-/* Preço padrão */
+/* Preço padrão amarelo e opção mais barata verde*/
 .transport-card .price {
   font-weight: bold;
   color: #ffdf00;
   transition: transform 0.3s ease;
 }
 
-/* Destaque para a melhor opção */
+
 .transport-card .best-option .price {
   color: #28a745;
   animation: pulse 1.5s infinite;
@@ -819,9 +819,7 @@ body {
     flex-direction: column;
     gap: 20px;
   }
-  .transport-card {
-    width: 100%;
-  }
+
 }
 
 @media (max-width: 480px) {
