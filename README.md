@@ -47,9 +47,23 @@ Para rodar o projeto localmente, siga os passos abaixo:
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/seuusuario/fast-price.git
-cd fast-price
-npm install
-npm start
+2. **Clone o repositório:**
+    ```bash
+    cd fast-price
+3. **Clone o repositório:**
+   ```bash
+   npm install
+ 3. **Clone o repositório:**
+   ```bash  
+   npm start
+
+
+
+
+
+
+##   Instalação e Execução  Tecnologias Utilizadas
+
 Acesse a aplicação: Abra o seu navegador e acesse http://localhost:3000
 
 
