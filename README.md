@@ -2,20 +2,75 @@
 
 ![Fast Price Banner](https://via.placeholder.com/800x200?text=Fast+Price)
 
-O Fast Price é uma aplicação web inovadora que revoluciona a forma como você escolhe seu transporte. Nosso sistema compara, em tempo real, os preços das principais plataformas de transporte – Uber, 99 e InDrive – para oferecer a melhor opção para seu trajeto. Além disso, o Fast Price integra informações meteorológicas e condições de trânsito em um mapa interativo, garantindo que você esteja sempre informado sobre o cenário atual e possa planejar sua viagem com segurança.
+O **Fast Price** é uma aplicação web inovadora que revoluciona a forma como você escolhe seu transporte. Nosso sistema compara, em tempo real, os preços das principais plataformas de transporte – **Uber, 99 e InDrive** – para oferecer a melhor opção para seu trajeto. Além disso, o Fast Price integra informações meteorológicas e condições de trânsito em um mapa interativo, garantindo que você esteja sempre informado sobre o cenário atual e possa planejar sua viagem com segurança.
 
-Funcionalidades: O sistema realiza uma comparação de preços entre Uber, 99 e InDrive, sugerindo a opção mais econômica. Além disso, integra dados meteorológicos que informam se o dia está ensolarado, chuvoso ou com tempestades, influenciando na estimativa de tempo e conforto da viagem. Também exibe um mapa interativo de trânsito, mostrando em tempo real as condições ao longo do trajeto com rotas coloridas (verde para trânsito fluido, amarelo para tráfego moderado e vermelho para congestionamento) e possibilita ao usuário ver rapidamente os pontos críticos do percurso. Por fim, há uma seção de feedback, onde os usuários podem deixar avaliações reais e construir uma comunidade colaborativa.
+---
 
-Tecnologias Utilizadas: O projeto utiliza React.js para construir uma interface dinâmica e responsiva, Leaflet.js para criar mapas interativos, além de diversas APIs para obtenção de preços de transporte, dados climáticos e informações de trânsito.
+## Funcionalidades e Fluxo de Funcionamento
 
-Instalação e Execução: Para rodar o projeto, certifique-se de ter o Node.js (versão LTS recomendada) e Git instalados. Primeiro, clone o repositório com o comando `git clone https://github.com/seuusuario/fast-price.git`. Em seguida, acesse a pasta do projeto com `cd fast-price` e instale as dependências usando `npm install`. Após a instalação, inicie o servidor de desenvolvimento com `npm start` e abra o navegador no endereço [http://localhost:3000](http://localhost:3000) para visualizar a aplicação.
+**1. Comparação de Preços:**  
+- **Multi-Plataforma:** O sistema coleta e compara os preços das corridas disponíveis em tempo real nas plataformas **Uber, 99 e InDrive**.  
+- **Sugestão Econômica:** Após a comparação, o Fast Price sugere a opção de menor custo, ajudando o usuário a economizar.
 
-Estrutura do Projeto: O projeto possui a seguinte estrutura: a pasta `public/` contém arquivos públicos e o `index.html`; a pasta `src/` armazena todo o código-fonte, com subpastas para Components (componentes reutilizáveis como ImputForm.jsx e TransportCard.jsx), Pages (páginas como Home.jsx e Traffic.jsx), styles (arquivos CSS personalizados) e o arquivo App.js, que é o componente principal; além disso, há o arquivo package.json com as configurações e dependências, e o próprio README.md com a documentação do projeto.
+**2. Integração com Dados Meteorológicos:**  
+- **Clima Atualizado:** O sistema integra dados climáticos que informam se o dia está **ensolarado, chuvoso ou com tempestades**.  
+- **Impacto no Transporte:** Essas informações podem influenciar na estimativa de tempo da viagem e no conforto do usuário.
 
-Contribuição: Contribuições são bem-vindas! Caso deseje sugerir melhorias, corrigir erros ou adicionar novas funcionalidades, abra uma issue explicando detalhadamente o problema ou a sugestão, faça um fork do repositório, realize suas alterações e envie um Pull Request. Para mais detalhes, consulte as Diretrizes de Contribuição.
+**3. Mapa Interativo de Trânsito:**  
+- **Visualização em Tempo Real:** Utilizando a tecnologia do Leaflet.js, o sistema exibe um mapa interativo que mostra as condições de trânsito ao longo do trajeto.  
+- **Rotas Coloridas:**  
+  - **Verde:** Indica que o trânsito está fluido.  
+  - **Amarelo:** Sinaliza tráfego moderado.  
+  - **Vermelho:** Mostra áreas com congestionamento.  
+- **Navegação Simplificada:** O usuário pode visualizar rapidamente os pontos críticos do percurso e se planejar melhor.
 
-Licença: Este projeto está licenciado sob a Licença MIT; para mais informações, consulte o arquivo LICENSE.
+**4. Feedback de Clientes:**  
+- **Avaliações Reais:** Os usuários podem deixar suas opiniões e avaliações sobre cada plataforma de transporte.  
+- **Comunidade Colaborativa:** Esse recurso ajuda a construir uma base de dados confiável, permitindo que novos usuários façam escolhas mais informadas.
 
-Contato: Se tiver dúvidas ou precisar de mais informações, entre em contato pelo email seuemail@exemplo.com ou visite nosso GitHub em [seuusuario](https://github.com/seuusuario).
+---
+
+## Tecnologias Utilizadas
+
+- **[React.js](https://reactjs.org/):** Para a construção de uma interface dinâmica e responsiva.
+- **[Leaflet.js](https://leafletjs.com/):** Para a criação de mapas interativos e visualização de trânsito.
+- **APIs de Transporte:** Para obtenção de preços em tempo real das plataformas.
+- **APIs de Clima:** Para fornecer dados meteorológicos atualizados.
+- **APIs de Trânsito:** Para consultar informações de fluxo e congestionamento.
+
+---
+
+## Instalação e Execução
+
+Para rodar o projeto localmente, siga os passos abaixo:
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/seuusuario/fast-price.git
+cd fast-price
+npm install
+npm start
+Acesse a aplicação: Abra o seu navegador e acesse http://localhost:3000
+
+
+Estrutura do Projeto
+O projeto está organizado da seguinte forma:
+
+fast-price/
+├── public/                 # Arquivos públicos e index.html
+├── src/                    # Código-fonte da aplicação
+│   ├── Components/         # Componentes reutilizáveis (ex.: ImputForm.jsx, TransportCard.jsx)
+│   ├── Pages/              # Páginas do site (ex.: Home.jsx, Traffic.jsx)
+│   ├── styles/             # Arquivos CSS personalizados
+│   └── App.js              # Componente principal da aplicação
+├── package.json            # Configurações do projeto e dependências
+└── README.md               # Documentação do projeto
+
+
+Contato
+Se você tiver dúvidas ou precisar de mais informações, entre em contato:
+
+Email: ryandoliveira@hotmail.com
+GitHub: (https://github.com/ryandoliveira)
 
 Desenvolvido com ❤️ pelo time Fast Price.
