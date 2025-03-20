@@ -58,10 +58,6 @@ Para rodar o projeto localmente, siga os passos abaixo:
    npm start
 
 
-
-
-
-
 ##   Instalação e Execução  Tecnologias Utilizadas
 
 Acesse a aplicação: Abra o seu navegador e acesse http://localhost:3000
