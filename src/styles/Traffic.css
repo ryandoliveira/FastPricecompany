@@ -134,3 +134,76 @@ body, button, input, select, textarea {
     font-size: 1rem;
   }
 }
+
+
+/* src/styles/Traffic.css */
+.traffic-container {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.globe-container {
+  width: 100%;
+  height: 100vh; /* Usa a altura total da viewport */
+  transition: opacity 1s ease-out;
+  opacity: 1;
+}
+
+.globe-container.fade-out {
+  opacity: 0;
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 100vh;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos responsivos para a página */
+@media (max-width: 768px) {
+  .traffic-header h2 {
+    font-size: 1.5rem;
+  }
+  .travel-time {
+    font-size: 1rem;
+  }
+}
+
+/* Canvas do globo */
+canvas {
+  width: 100%;
+  height: auto;
+  max-width: 100%; /* Garante que o canvas não ultrapasse a largura */
+  max-height: 100%; /* Garante que o canvas não ultrapasse a altura */
+  object-fit: contain; /* Ajusta o conteúdo sem distorcer */
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+  .globe-container {
+    height: 60vh; /* Ajusta a altura para 60% da altura da tela em dispositivos móveis */
+  }
+
+  canvas {
+    width: 80%; /* Ajusta a largura do canvas para 80% em telas menores */
+    height: auto;
+    max-height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .globe-container {
+    height: 50vh; /* Ajusta ainda mais a altura para 50% em telas muito pequenas */
+  }
+
+  canvas {
+    width: 70%; /* Ajusta a largura para 70% em telas pequenas */
+    height: auto;
+    max-height: 100%;
+  }
+}
