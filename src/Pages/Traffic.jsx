@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from 'react-leaflet';
 import { useLocation } from 'react-router-dom';
 import Globe from 'react-globe.gl';
@@ -13,14 +13,14 @@ const JAWG_API_KEY = 'ZPF7gcpHO7h6ciXCjdt47BqLv6u1XhKrQSgUqVt69NUPGy7XvBAfjP4pHH
 // Ícones personalizados para os marcadores de origem e destino
 const customMarkerIcon = new L.Icon({
   iconUrl: require('../Pictures/bonequinhomuitobrabo.gif'),
-  iconSize: [58, 58], // tamanho do ícone de partida
-  iconAnchor: [34, 58], // ponto de ancoragem do ícone (pode ser ajustado conforme necessário)
+  iconSize: [58, 58],
+  iconAnchor: [34, 58],
   popupAnchor: [0, -48],
 });
 
 const destinationMarkerIcon = new L.Icon({
   iconUrl: require('../Pictures/localization.gif'),
-  iconSize: [32, 32], // tamanho do ícone de destino
+  iconSize: [32, 32],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
@@ -44,8 +44,10 @@ function Traffic() {
   const [fadeOut, setFadeOut] = useState(false);
   // Estado que controla o ponto de vista do globo para simular aproximação
   const [pointOfView, setPointOfView] = useState({ lat: 0, lng: 0, altitude: 5 });
+  // Cache para os dados de tráfego (chave: "lat,lng" com 3 casas decimais)
+  const trafficCache = useRef({});
 
-  // Efeito que inicia o fade out do globo após 4 segundos e o esconde aos 5 segundos
+  // Inicia o fade out do globo após 4 segundos e o esconde aos 5 segundos
   useEffect(() => {
     const timerFade = setTimeout(() => {
       setFadeOut(true);
@@ -76,7 +78,6 @@ function Traffic() {
     throw new Error('Endereço não encontrado: ' + address);
   };
 
-  // Efeito para buscar a rota e configurar o ponto de vista do globo
   useEffect(() => {
     if (origin && destination) {
       const fetchRoute = async () => {
@@ -115,22 +116,17 @@ function Traffic() {
         }
       };
 
-      // Segmenta a rota em até 20 partes (caso haja pontos suficientes)
+      // Segmenta a rota em até 100 partes para maior fidelidade – mesmo que isso gere muitas requisições
       const fetchTrafficSegments = async (coords) => {
         try {
           const segments = [];
-          const SEGMENT_COUNT = Math.min(20, coords.length - 1);
-          if (SEGMENT_COUNT < 1) {
-            const color = await getSegmentTrafficColor(coords);
-            segments.push({ coords, color });
-            setTrafficSegments(segments);
-            return;
-          }
+          const MAX_SEGMENTS = 100;
+          const SEGMENT_COUNT = Math.min(coords.length - 1, MAX_SEGMENTS);
           const chunkSize = (coords.length - 1) / SEGMENT_COUNT;
           for (let i = 0; i < SEGMENT_COUNT; i++) {
             const startIndex = Math.floor(i * chunkSize);
             const endIndex = (i === SEGMENT_COUNT - 1) ? coords.length - 1 : Math.floor((i + 1) * chunkSize);
-            let segmentCoords = coords.slice(startIndex, endIndex + 1);
+            const segmentCoords = coords.slice(startIndex, endIndex + 1);
             if (segmentCoords.length < 2) continue;
             const color = await getSegmentTrafficColor(segmentCoords);
             segments.push({ coords: segmentCoords, color });
@@ -141,10 +137,15 @@ function Traffic() {
         }
       };
 
-      // Avalia três pontos do segmento para determinar a cor baseada no pior desempenho do tráfego
+      // Para cada segmento, amostra 7 pontos (dividindo uniformemente o segmento) para determinar o pior cenário de tráfego
       const getSegmentTrafficColor = async (segmentCoords) => {
         try {
-          const sampleIndices = [0, Math.floor(segmentCoords.length / 2), segmentCoords.length - 1];
+          const sampleCount = 7;
+          const sampleIndices = [];
+          const len = segmentCoords.length;
+          for (let i = 0; i < sampleCount; i++) {
+            sampleIndices.push(Math.floor((i / (sampleCount - 1)) * (len - 1)));
+          }
           const ratios = await Promise.all(
             sampleIndices.map(idx => getTrafficRatio(segmentCoords[idx]))
           );
@@ -160,14 +161,21 @@ function Traffic() {
       };
 
       // Consulta a API TomTom para obter a razão de tráfego (currentSpeed / freeFlowSpeed)
+      // Utiliza um cache simples com precisão de 3 casas decimais para evitar requisições redundantes
       const getTrafficRatio = async ([lat, lon]) => {
         try {
+          const key = `${lat.toFixed(3)},${lon.toFixed(3)}`;
+          if (trafficCache.current[key] !== undefined) {
+            return trafficCache.current[key];
+          }
           const trafficUrl = `https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/10/json?point=${lat},${lon}&key=${TOMTOM_API_KEY}`;
           const res = await fetch(trafficUrl);
           const data = await res.json();
           if (data && data.flowSegmentData) {
             const { currentSpeed, freeFlowSpeed } = data.flowSegmentData;
-            return currentSpeed / freeFlowSpeed;
+            const ratio = currentSpeed / freeFlowSpeed;
+            trafficCache.current[key] = ratio;
+            return ratio;
           }
           return null;
         } catch (err) {
@@ -183,16 +191,15 @@ function Traffic() {
   return (
     <div className="traffic-container">
       {showGlobe ? (
-        // Exibição do globo terrestre com fade out para revelar o mapa
         <div className={`globe-container ${fadeOut ? 'fade-out' : ''}`}>
           <Globe
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
             backgroundColor="#000000"
             atmosphereColor="#444444"
             atmosphereAltitude={0.25}
-            autoRotate={true}           // Gira o globo em sentido horário
-            autoRotateSpeed={0.1}        // Velocidade da rotação
-            pointOfView={pointOfView}    // Ponto de vista para simular aproximação
+            autoRotate={true}
+            autoRotateSpeed={0.1}
+            pointOfView={pointOfView}
             transitionDuration={2000}
             onClick={() => setShowGlobe(false)}
           />
