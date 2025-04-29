@@ -7,7 +7,7 @@ import '../styles/Traffic.css';
 import L from 'leaflet';
 
 // Chaves de API
-const TOMTOM_API_KEY = '3YDGghXPQDfKIQU0JGnvCb2bKGGPyK2B';
+const TOMTOM_API_KEY = '3QWmoRWsgfrG6ukl57xWInUh9hBPHSvo';
 const JAWG_API_KEY = 'ZPF7gcpHO7h6ciXCjdt47BqLv6u1XhKrQSgUqVt69NUPGy7XvBAfjP4pHH2XDOVN';
 
 // Ícones personalizados
