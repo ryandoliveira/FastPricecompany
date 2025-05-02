@@ -46,7 +46,7 @@ Para rodar o projeto localmente, siga os passos abaixo:
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/seuusuario/fast-price.git
+   git clone https://github.com/ryandoliveira/FastPricecompany/tree/main
 2. **Clone o repositório:**
     ```bash
     cd fast-price
