@@ -1,6 +1,6 @@
 # Fast Price - O Comparador de Preços de Transporte
 
-![Fast Price Banner](https://via.placeholder.com/800x200?text=Fast+Price)
+![Fast Price Banner](file:///C:/Users/Ryan/Downloads/github%20FP.png)
 
 O **Fast Price** é uma aplicação web inovadora que revoluciona a forma como você escolhe seu transporte. Nosso sistema compara, em tempo real, os preços das principais plataformas de transporte – **Uber, 99 e InDrive** – para oferecer a melhor opção para seu trajeto. Além disso, o Fast Price integra informações meteorológicas e condições de trânsito em um mapa interativo, garantindo que você esteja sempre informado sobre o cenário atual e possa planejar sua viagem com segurança.
 
