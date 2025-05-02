@@ -59,7 +59,7 @@ function Home() {
   const [weatherCondition] = useState("sunny");
 
   useEffect(() => {
-    fetch('/dadostratados.json')
+    fetch('/corridasexemplo.json')
       .then(response => {
         if (!response.ok) throw new Error('Erro ao buscar os dados de preços');
         return response.json();
