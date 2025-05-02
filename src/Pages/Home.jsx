@@ -52,23 +52,16 @@ function Home() {
   const [destinationAddress, setDestinationAddress] = useState('');
   const [distance, setDistance] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-
   const [isAirlineMode, setIsAirlineMode] = useState(false);
   const [isPremiumUnlocked, setIsPremiumUnlocked] = useState(false);
-  const [showPrices, setShowPrices] = useState(false); // controla exibição dos preços
-
-  // Puxar dados de precificação do JSON (corridasexemplo.json)
+  const [showPrices, setShowPrices] = useState(false);
   const [rideData, setRideData] = useState(null);
-
-  // Estado para condição climática: "sunny", "lightRain" ou "storm"
   const [weatherCondition] = useState("sunny");
 
   useEffect(() => {
-    fetch('/corridasexemplo.json')
+    fetch('/dadostratados.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os dados de preços');
-        }
+        if (!response.ok) throw new Error('Erro ao buscar os dados de preços');
         return response.json();
       })
       .then(json => setRideData(json))
@@ -82,40 +75,48 @@ function Home() {
       const routeDistance = await getDrivingDistance(origin, destination);
       setDistance(routeDistance);
       setErrorMessage('');
-      setShowPrices(false); // ao recalcular distância, oculta os preços novamente
+      setShowPrices(false);
     } catch (error) {
-      setErrorMessage(error.message);
+      console.error("Erro ao fazer a requisição:", error);
+      setErrorMessage("Erro ao calcular a distância: " + error.message);
       setDistance(null);
     }
   };
 
-  const handleComparePrices = () => {
-    console.log("Comparar preços para:");
-    console.log("Origem:", originAddress);
-    console.log("Destino:", destinationAddress);
-    console.log("Distância:", distance);
-    // Exibe os preços após clicar
-    setShowPrices(true);
+  const handleComparePrices = async () => {
+    if (!originAddress || !destinationAddress) {
+      alert("Por favor, informe o endereço de partida e destino primeiro.");
+      return;
+    }
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/estimate_prices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin: originAddress, destination: destinationAddress, distance }),
+      });
+      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+      const data = await response.json();
+      console.log(data);
+      setShowPrices(true);
+    } catch (error) {
+      console.error('Erro ao fazer requisição:', error);
+    }
   };
 
-  // Novo botão para ver o trânsito
   const handleTraffic = () => {
     if (!originAddress || !destinationAddress) {
       alert("Por favor, informe o endereço de partida e destino primeiro.");
       return;
     }
-    // Monta a URL com query string contendo os parâmetros
     const url = `/traffic?origin=${encodeURIComponent(originAddress)}&destination=${encodeURIComponent(destinationAddress)}&weather=${weatherCondition}`;
     window.open(url, '_blank');
   };
 
-  const handleSwitchMode = (mode) => {
+  const handleSwitchMode = mode => {
     setIsAirlineMode(mode === 'airline');
   };
 
-  const handleUnlockPremium = () => {
-    setIsPremiumUnlocked(true);
-  };
+  const handleUnlockPremium = () => setIsPremiumUnlocked(true);
 
   return (
     <>
@@ -136,7 +137,7 @@ function Home() {
           <div className="about-text">
             <h2>Sobre Nós</h2>
             <p>
-              Na FastPrice, reunimos informações das principais plataformas de transporte, como <span className="highlight">Uber</span>, <span className="highlight">99</span> e <span className="highlight">InDrive</span>, para oferecer a melhor comparação de preços e conforto.
+              Na FastPrice, reunimos informações das principais plataformas de transporte, como <span className="highlight">Uber</span>, <span className="highlight">99</span> e <span className="highlight">InDrive</span>.
             </p>
           </div>
         </div>
@@ -176,25 +177,19 @@ function Home() {
             {distance && (
               <div className="distance-area">
                 <span className="distance-info">Distância: {distance}</span>
-                <button 
-                  className="compare-btn" 
+                <button
+                  className="compare-btn"
                   onClick={handleComparePrices}
                   disabled={isAirlineMode && !isPremiumUnlocked}
                 >
                   Comparar Preços
                 </button>
-                {/* Novo botão para visualizar o trânsito */}
-                <button 
-                  className="traffic-btn" 
-                  onClick={handleTraffic}
-                  style={{ marginLeft: '10px' }}
-                >
+                <button className="traffic-btn" onClick={handleTraffic} style={{ marginLeft: '10px' }}>
                   Como está o trânsito?
                 </button>
               </div>
             )}
 
-            {/* Switch e conteúdo de transporte */}
             {isAirlineMode && !isPremiumUnlocked ? (
               <div className="premium-block-wrapper">
                 <div className="premium-block">
@@ -219,13 +214,13 @@ function Home() {
             ) : (
               <>
                 <div className="switch-container">
-                  <button 
+                  <button
                     className={`switch-button ${!isAirlineMode ? "active" : ""}`}
                     onClick={() => handleSwitchMode('terrestrial')}
                   >
                     Transporte Terrestre
                   </button>
-                  <button 
+                  <button
                     className={`switch-button ${isAirlineMode ? "active" : "locked"}`}
                     onClick={() => handleSwitchMode('airline')}
                   >
@@ -241,62 +236,21 @@ function Home() {
                     </>
                   ) : (
                     <>
-                      {!rideData ? (
-                        <p>Carregando dados de preços...</p>
-                      ) : (
-                        <>
-                          <TransportCard
-                            platform="Uber"
-                            options={["uberX", "uberComfort", "uberBlack"]}
-                            iconUrl={Ubericon}
-                            priceData={{
-                              "uberX": rideData?.uberX?.price,
-                              "uberComfort": rideData?.uberComfort?.price,
-                              "uberBlack": rideData?.uberBlack?.price
-                            }}
-                            distance={distance}
-                            weatherCondition={weatherCondition}
-                            showPrices={showPrices}
-                          />
-                          <TransportCard
-                            platform="99"
-                            options={["99POP", "99Comfort", "99Taxi"]}
-                            iconUrl={novenoveicon}
-                            priceData={{
-                              "99POP": rideData?.["99POP"]?.price,
-                              "99Comfort": rideData?.["99Comfort"]?.price,
-                              "99Taxi": rideData?.["99Taxi"]?.price
-                            }}
-                            distance={distance}
-                            weatherCondition={weatherCondition}
-                            showPrices={showPrices}
-                          />
-                          <TransportCard
-                            platform="InDrive"
-                            options={["InDriveComum"]}
-                            iconUrl={InDriveicon}
-                            priceData={{
-                              "InDriveComum": rideData?.indriveComum?.price
-                            }}
-                            distance={distance}
-                            weatherCondition={weatherCondition}
-                            showPrices={showPrices}
-                          />
-                        </>
-                      )}
+                      <TransportCard platform="Uber" options={["Uber", "Uber Comfort"]} iconUrl={Ubericon} distance={distance} weatherCondition={weatherCondition} showPrices={showPrices} />
+                      <TransportCard platform="99" options={["99", "99 Comfort"]} iconUrl={InDriveicon} distance={distance} weatherCondition={weatherCondition} showPrices={showPrices} />
+                      <TransportCard platform="InDrive" options={["InDrive", "InDrive Pro"]} iconUrl={novenoveicon} distance={distance} weatherCondition={weatherCondition} showPrices={showPrices} />
                     </>
                   )}
                 </div>
               </>
             )}
-            
-            <WeatherAnimation />
           </div>
+          <WeatherAnimation condition={weatherCondition} />
         </div>
       </section>
 
       {/* Seção 4: Footer */}
-      <section className="footerrealmadrid">
+      <section className="section section-footer">
         <Footer />
       </section>
     </>
