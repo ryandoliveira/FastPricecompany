@@ -18,7 +18,7 @@ function Footer() {
             <h4>Equipe Front-end</h4>
             <div className="team-members">
               <div className="member">
-                <img src= {devRyan} alt="Ryan" className="team-image" />
+                <img src= {devryan} alt="Ryan" className="team-image" />
                 <p className="member-role">Idealização, prototipagem e criação do layout e suas ferramentas.</p>
                 <a href="https://www.linkedin.com/in/ryan-oliveira-2b54092a1/" target="_blank" rel="noopener noreferrer" className="linkedin-button">
                   <img src={linkedinIcon} alt="LinkedIn" className="linkedin-icon" /> Ryan Oliveira
@@ -84,5 +84,6 @@ function Footer() {
 
 
 export default Footer;
+
 
 
