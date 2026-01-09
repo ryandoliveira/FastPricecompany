@@ -1,5 +1,5 @@
 import React from 'react';
-import devryan from '../Pictures/Ryan.jpg';
+import devryan from '../Pictures/0905A881-9019-4D9A-ACA7-1AAF47581BEB.jpg';
 import devkaua from '../Pictures/Kaua.jpg';
 import devkaue from '../Pictures/kaue.jpg';
 import devfilipi from '../Pictures/filipi.jpg';
@@ -84,4 +84,5 @@ function Footer() {
 
 
 export default Footer;
+
 
